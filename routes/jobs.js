@@ -11,8 +11,8 @@ const {
 
 router.get("/", getAllJobs);
 router.post("/", createJob);
-router.post("/:id", getJob);
-router.post("/:id", updateJob);
+router.get("/:id", getJob);
+router.patch("/:id", updateJob);
 router.post("/:id", deleteJob);
 
 module.exports = router;
