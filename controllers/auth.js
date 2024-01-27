@@ -33,7 +33,27 @@ const login = async (req, res) => {
   res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
 };
 
+const updateUser = async (req, res) => {
+  const { name, email } = req.body;
+
+  if (!name || !email) {
+    throw new BadRequestError("Please provide email and name");
+  }
+
+  const user = await User.findOne({ _id: req.user.userId });
+
+  user.email = email;
+  user.name = name;
+
+  await user.save();
+
+  const token = user.createJWT();
+
+  res.status(StatusCodes.OK).json({ user: { name: user.name }, token });
+};
+
 module.exports = {
   register,
   login,
+  updateUser,
 };
