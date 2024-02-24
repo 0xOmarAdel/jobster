@@ -1,69 +1,79 @@
-#### Setup
+# Jobster
 
-```bash
-npm install && npm start
-```
+## Description
 
-#### Database Connection
+Jobster is a project created for practicing Mongoose, JWT, and Express. It includes user authentication (login/register/update) and CRUD operations for job models.
 
-1. Import connect.js
-2. Invoke in start()
-3. Setup .env in the root
-4. Add MONGO_URI with correct value
+## Installation
 
-#### Routers
+Make sure you have Node.js and npm installed on your machine.
 
-- auth.js
-- jobs.js
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/0xOmarAdel/jobster.git
+   cd jobster
+   ```
 
-#### User Model
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-Email Validation Regex
+3. Create a `.env` file in the root directory and configure the following variables:
 
-```regex
-/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-```
+   ```env
+   PORT=5000
+   MONGODB_URL=your-mongodb-connection-string
+   JWT_SECRET=your-secret-key
+   JWT_LIFETIME=30d
+   ```
 
-#### Register User
+4. Start the application:
+   ```bash
+   npm start
+   ```
 
-- Validate - name, email, password - with Mongoose
-- Hash Password (with bcryptjs)
-- Save User
-- Generate Token
-- Send Response with Token
+   The application will be accessible at http://localhost:5000.
 
-#### Login User
+## Scripts
 
-- Validate - email, password - in controller
-- If email or password is missing, throw BadRequestError
-- Find User
-- Compare Passwords
-- If no user or password does not match, throw UnauthenticatedError
-- If correct, generate Token
-- Send Response with Token
+- `npm start`: Start the application using nodemon.
 
-#### Mongoose Errors
+## Technologies Used
 
-- Validation Errors
-- Duplicate (Email)
-- Cast Error
+- Node.js
+- Express
+- Mongoose
+- JWT (jsonwebtoken)
+- Bcryptjs
+- Cors
+- Dotenv
+- Express-async-errors
+- Express-rate-limit
+- Helmet
+- HTTP Status Codes
+- Rate Limiter
+- XSS Clean
+- YAMLjs
 
-#### Security
+## Project Structure
 
-- helmet
-- cors
-- xss-clean
-- express-rate-limit
+- **Models:**
+  - User Model: Handles user authentication (login/register/edit).
+  - Job Model: Provides CRUD operations for job entities.
 
-Swagger UI
+- **Middleware:**
+  - Authentication Middleware: Verifies JWT tokens for secure routes.
+  - Rate Limiter Middleware: Limits the rate of requests to prevent abuse.
 
-```yaml
-/jobs/{id}:
-  parameters:
-    - in: path
-      name: id
-      schema:
-        type: string
-      required: true
-      description: the job id
-```
+- **Routes:**
+  - Auth Routes: Handles user authentication.
+  - Job Routes: Manages CRUD operations for job entities.
+
+- **Utilities:**
+  - Error Handling: Express-async-errors for handling asynchronous errors.
+  - Validation: Joi for request validation.
+
+- **Security:**
+  - Helmet: Enhances application security with HTTP headers.
+  - XSS Clean: Protects against cross-site scripting attacks.
